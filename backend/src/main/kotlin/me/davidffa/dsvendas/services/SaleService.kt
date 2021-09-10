@@ -13,6 +13,7 @@ class SaleService(
   val repository: SaleRepository,
   val sellerRepository: SellerRepository
 ) {
+
   @Transactional(readOnly = true)
   fun findAll(pageable: Pageable): Page<SaleDTO> {
     sellerRepository.findAll()
@@ -20,4 +21,10 @@ class SaleService(
 
     return result.map { SaleDTO(it) }
   }
+
+  @Transactional(readOnly = true)
+  fun amountGroupedBySeller() = repository.amountGroupedBySeller()
+
+  @Transactional(readOnly = true)
+  fun successGroupedBySeller() = repository.successGroupedBySeller()
 }
